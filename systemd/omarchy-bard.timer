@@ -1,0 +1,14 @@
+[Unit]
+Description=The Bard drops by five times on workdays
+
+[Timer]
+# Change the schedule with: systemctl --user edit omarchy-bard.timer
+OnCalendar=Mon..Fri *-*-* 10:30:00
+OnCalendar=Mon..Fri *-*-* 12:00:00
+OnCalendar=Mon..Fri *-*-* 13:30:00
+OnCalendar=Mon..Fri *-*-* 15:00:00
+OnCalendar=Mon..Fri *-*-* 16:30:00
+# No Persistent=: a missed song is not replayed at boot, it would come in a burst.
+
+[Install]
+WantedBy=timers.target

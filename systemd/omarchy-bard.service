@@ -1,0 +1,6 @@
+[Unit]
+Description=The Bard: jaw, shoulders, fingers, gentle typing
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/share/omarchy-bard/bard

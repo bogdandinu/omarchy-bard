@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# omarchy-bard: a support character who drops by a few times a day and reminds
+# you to unclench your jaw, drop your shoulders and type gently.
+
+set -euo pipefail
+
+# Make sure the session bus is reachable when run from systemd --user.
+export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
+export DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS:-unix:path=${XDG_RUNTIME_DIR}/bus}"
+
+here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+user_dir="${XDG_CONFIG_HOME:-$HOME/.config}/omarchy-bard"
+
+# Language: BARD_LANG from bard.conf, else the system locale, else English.
+BARD_LANG=""
+[[ -f "$user_dir/bard.conf" ]] && source "$user_dir/bard.conf"
+lang="${BARD_LANG:-${LANG%%_*}}"
+[[ -d "$here/lang/$lang" || -d "$user_dir/lang/$lang" ]] || lang="en"
+
+# Your own lines win: ~/.config/omarchy-bard/lang/<lang>/<file> replaces the bundled one.
+source_file() {
+  if [[ -f "$user_dir/lang/$lang/$1" ]]; then
+    printf '%s' "$user_dir/lang/$lang/$1"
+  else
+    printf '%s' "$here/lang/$lang/$1"
+  fi
+}
+
+pick() {
+  local lines=()
+  mapfile -t lines < <(grep -v '^[[:space:]]*\(#\|$\)' "$1")
+  printf '%s' "${lines[$((RANDOM % ${#lines[@]}))]}"
+}
+
+title="$(pick "$(source_file titles.txt)")"
+message="$(pick "$(source_file messages.txt)")"
+
+# urgency=critical keeps the toast on screen until you dismiss it: the Bard is
+# listened to on purpose, not left to fade away.
+notify-send \
+  --app-name="Bard" \
+  --urgency=critical \
+  --icon="$here/assets/bard-lute.png" \
+  "$title" "$message"
