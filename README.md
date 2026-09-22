@@ -1,7 +1,7 @@
 # omarchy-bard
 
 A support character for [Omarchy](https://omarchy.org). A few times a day the Bard drops by with a
-notification (silent, no sound) and reminds you to unclench your jaw, drop your shoulders and type gently: no anger, no
+notification and reminds you to unclench your jaw, drop your shoulders and type gently: no anger, no
 hurry, with intent.
 
 ![The Bard](assets/screenshot.png)
