@@ -6,7 +6,7 @@ hurry, with intent.
 
 ![The Bard](assets/screenshot.png)
 
-I made it for myself: incipient arthritis in my fingers, severe bruxism, and a habit of typing like I'm
+I made it for myself: early arthritis in my fingers, severe bruxism, and a habit of typing like I'm
 hitting war drums. Maybe it helps you too.
 
 ## Install
