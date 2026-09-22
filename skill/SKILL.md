@@ -9,7 +9,7 @@ description: >
 
 # omarchy-bard
 
-The Bard is a desktop notification (no sound), sent by a systemd user timer. Each visit picks one
+The Bard is a desktop notification, sent by a systemd user timer. Each visit picks one
 random title and one random message.
 
 ## Where things live
