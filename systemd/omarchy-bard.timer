@@ -8,7 +8,7 @@ OnCalendar=Mon..Fri *-*-* 12:00:00
 OnCalendar=Mon..Fri *-*-* 13:30:00
 OnCalendar=Mon..Fri *-*-* 15:00:00
 OnCalendar=Mon..Fri *-*-* 16:30:00
-# No Persistent=: a missed song is not replayed at boot, it would come in a burst.
+# No Persistent=: a missed visit is not replayed at boot, they would come in a burst.
 
 [Install]
 WantedBy=timers.target

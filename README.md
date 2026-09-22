@@ -1,7 +1,7 @@
 # omarchy-bard
 
 A support character for [Omarchy](https://omarchy.org). A few times a day the Bard drops by with a
-notification and reminds you to unclench your jaw, drop your shoulders and type gently: no anger, no
+notification (silent, no sound) and reminds you to unclench your jaw, drop your shoulders and type gently: no anger, no
 hurry, with intent.
 
 ![The Bard](assets/screenshot.png)
@@ -17,13 +17,13 @@ cd omarchy-bard
 ./install.sh
 ```
 
-It copies itself to `~/.local/share/omarchy-bard`, installs a systemd user timer and plays a first song
+It copies itself to `~/.local/share/omarchy-bard`, installs a systemd user timer and shows you a first visit
 right away. It needs nothing beyond what Omarchy already has (`notify-send`, systemd).
 
 ## When the Bard comes
 
-Monday to Friday at 10:30, 12:00, 13:30, 15:00 and 16:30. A missed song (machine off or asleep) is not
-replayed later. To change the schedule:
+Monday to Friday at 10:30, 12:00, 13:30, 15:00 and 16:30. A missed visit (machine off or asleep) is not
+made up later. To change the schedule:
 
 ```sh
 systemctl --user edit omarchy-bard.timer
@@ -38,8 +38,8 @@ OnCalendar=Mon..Fri *-*-* 14:00:00
 
 The empty `OnCalendar=` clears the default times before adding yours.
 
-The notification stays on screen until you dismiss it. That's on purpose: you listen to the Bard, you
-don't let him fade away.
+The notification stays on screen until you dismiss it. That's on purpose: you take the Bard's advice
+consciously, you don't let it fade away.
 
 ## Language
 
@@ -62,6 +62,18 @@ toast cuts the rest. A new language is just a new folder.
 ```sh
 systemctl --user start omarchy-bard.service
 ```
+
+## Ask your agent
+
+The Bard ships with an agent skill, [`skill/SKILL.md`](skill/SKILL.md), the same way Omarchy ships its own.
+`install.sh` links it into `~/.claude/skills/` and `~/.agents/skills/` when those folders exist, so you can
+just ask Claude Code, Codex or any agent that reads skills:
+
+> Make the Bard come only at 11 and 14.
+> Add a message about drinking water, in the Bard's voice.
+> Teach the Bard French.
+
+The skill tells the agent where your settings live and to leave the installed copy alone.
 
 ## Uninstall
 
